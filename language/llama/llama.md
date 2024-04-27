@@ -43,3 +43,15 @@ Picked up on improvements over the transformer architecture.
 - We replace the ReLU non-linearity by the SwiGLU activation function, introduced by Shazeer (2020) to improve the performance.
 3. Rotary Embeddings [GPTNeo]
 - We remove the absolute positional embeddings, and instead, add rotary positional embeddings (RoPE), introduced by Su et al. (2021), at each layer of the network.
+
+## Optimizer
+- AdamW
+- Cosine Learning Rate Schedule
+
+## Efficient Implementation
+1. We use an efficient implementation of the causal multi-head attention to reduce memory usage and runtime. This is achieved
+by not storing the attention weights and not computing the key/query scores that are masked due to
+the causal nature of the language modeling task.
+2. We reduced the amount of activations that are recomputed during the backward pass with checkpointing. More precisely, we save the activations that
+are expensive to compute, such as the outputs of linear layers.
+3. We also overlap the computation of activations and the communication between GPUs over the network (due toall_reduce operations) as much as possible.
