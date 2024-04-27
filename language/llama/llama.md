@@ -32,3 +32,14 @@
 - Bytepair encoding (BPE) algorithm (Sennrich et al.,2015), using the implementation from SentencePiece (Kudo and Richardson, 2018).
 - Split all numbers into individual digits, and fallback to bytes to decompose unknown UTF-8 characters.
 - Training dataset contains roughly 1.4T tokens after tokenization.
+
+## Architecture
+Picked up on improvements over the transformer architecture.
+
+1. Pre-normalization [GPT3]
+- To improve the training stability, we normalize the input of each transformer sub-layer, instead of normalizing the output.
+- We use the RMSNorm normalizing function, introduced by Zhang and Sennrich (2019).
+2. SwiGLU activation function [PaLM]
+- We replace the ReLU non-linearity by the SwiGLU activation function, introduced by Shazeer (2020) to improve the performance.
+3. Rotary Embeddings [GPTNeo]
+- We remove the absolute positional embeddings, and instead, add rotary positional embeddings (RoPE), introduced by Su et al. (2021), at each layer of the network.
