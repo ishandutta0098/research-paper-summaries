@@ -1,5 +1,7 @@
 # LLAMA
 
+- [LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971)
+  
 ## Introduction
 - Best performances are not achieved by largest models but by smaller models trained on more data.
 - Key thing to note is inference speed matters a lot. We prefer a faster inference model, so a smaller model trained longer will be cheaper at inference.
